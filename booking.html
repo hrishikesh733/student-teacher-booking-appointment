@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Appointment</title>
+  <link rel="stylesheet" href="style.css" />
+   <link rel="icon" href="meeting.png">
+</head>
+<body>
+  <h1>📚 Book Student-Teacher Appointment</h1>
+  <div class="container">
+    <div class="booking-form">
+      <h2>📆 Book Appointment</h2>
+      <form id="appointmentForm">
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" required pattern="[0-9]{10}" maxlength="10" />
+
+       <label for="teacherName">Select Teacher (with Subject):</label>
+<select id="teacherName" required>
+  <option value="">Choose a teacher</option>
+  <option value="Dr. Smith - Physics">Dr. Smith – Physics</option>
+  <option value="Prof. Johnson - Chemistry">Prof. Johnson – Chemistry</option>
+  <option value="Ms. Lee - Mathematics">Ms. Lee – Mathematics</option>
+  <option value="Mr. Thomas - English">Mr. Thomas – English</option>
+  <option value="Mrs. Patel - Biology">Mrs. Patel – Biology</option>
+  <option value="Dr. Mehra - Computer Science">Dr. Mehra – Computer Science</option>
+  <option value="Prof. Reddy - Economics">Prof. Reddy – Economics</option>
+  <option value="Ms. Clara - History">Ms. Clara – History</option>
+  <option value="Mr. Arjun - Geography">Mr. Arjun – Geography</option>
+  <option value="Mrs. Fernandes - Hindi">Mrs. Fernandes – Hindi</option>
+</select>
+
+        <label for="date">Preferred Date:</label>
+        <input type="date" id="date" required />
+
+        <label for="time">Preferred Time:</label>
+        <input type="time" id="time" required />
+
+        <button type="submit">✅ Book Appointment</button>
+      </form>
+      <div class="msg" id="msg"></div>
+
+      <div style="margin-top: 2rem;">
+        <a href="appointment.html">📋 View All Appointments</a>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

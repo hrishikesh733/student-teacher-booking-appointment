@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>View Appointments</title>
+  <link rel="stylesheet" href="style.css" />
+   <link rel="icon" href="meeting.png">
+</head>
+<body>
+  <h1>📋 Appointment List</h1>
+  <div class="container">
+    <div class="appointments" style="width: 100%;">
+      <h2>All Booked Appointments</h2>
+      <table id="appointmentsTable">
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Teacher</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Appointments load here -->
+        </tbody>
+      </table>
+
+      <div style="margin-top: 2rem;">
+        <a href="booking.html">🔙 Go Back to Booking</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const appointmentsTable = document
+      .getElementById('appointmentsTable')
+      .querySelector('tbody');
+
+    let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+
+    function formatTime24to12(timeStr) {
+      const [hourStr, minute] = timeStr.split(':');
+      const hour = parseInt(hourStr, 10);
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      const hour12 = hour % 12 || 12;
+      return `${hour12}:${minute} ${ampm}`;
+    }
+
+    function renderTable() {
+      appointmentsTable.innerHTML = '';
+      if (!appointments.length) {
+        appointmentsTable.innerHTML =
+          '<tr><td colspan="7" style="text-align:center">No appointments</td></tr>';
+        return;
+      }
+
+      appointments.forEach((appt, idx) => {
+        const row = appointmentsTable.insertRow();
+        row.insertCell().textContent = appt.student;
+        row.insertCell().textContent = appt.email;
+        row.insertCell().textContent = appt.phone;
+        row.insertCell().textContent = appt.teacher;
+        row.insertCell().textContent = appt.date;
+        row.insertCell().textContent = formatTime24to12(appt.time);
+
+        const delCell = row.insertCell();
+        const delBtn = document.createElement('button');
+        delBtn.textContent = 'Delete';
+        delBtn.className = 'delete-btn';
+        delBtn.onclick = () => {
+          appointments.splice(idx, 1);
+          localStorage.setItem('appointments', JSON.stringify(appointments));
+          renderTable();
+        };
+        delCell.appendChild(delBtn);
+      });
+    }
+
+    renderTable();
+  </script>
+</body>
+</html>
